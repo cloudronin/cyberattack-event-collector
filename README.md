@@ -1,5 +1,5 @@
 # Cyber Attack Collector Tool
-Tool to collect cyber attacks that Norse tracks and persist it into locally running MongoDB instance
+Tool to collect cyber attacks that Norse tracks (http://map.norsecorp.com/) and persist into locally running MongoDB instance
 
 The Cyber-Attack-Collector Tool was built and tested on a Mac OSX 10.10.4 and requires the following dependencies to run:
 
