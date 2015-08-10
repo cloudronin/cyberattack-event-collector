@@ -2,7 +2,8 @@
 
 
 # Cyber Attack Event Collector 
-Tool to collect and persist cyber attack events that Norse tracks (http://map.norsecorp.com/) into a locally running MongoDB instance
+Tool to collect and persist cyber attack events that Norse tracks (http://map.norsecorp.com/) into a locally running MongoDB instance.
+The purpose of collecting these events is to use them for analysis by downstream tools like Spark and/or R/Python to train a model that classify IP traffic as malicious
 
 The Cyber Attack Event Collector Tool was built and tested on a Mac OSX 10.10.4 and requires the following dependencies to run:
 
