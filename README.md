@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/cloudronin/cyberattack-collector.svg?branch=master)](https://travis-ci.org/cloudronin/cyberattack-collector/)
+
+
 # Cyber Attack Collector Tool
 Tool to collect cyber attacks that Norse tracks (http://map.norsecorp.com/) and persist into locally running MongoDB instance
 
