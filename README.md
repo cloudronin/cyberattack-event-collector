@@ -10,5 +10,4 @@ mvn clean install
 
 and then running the main class in the tool (no arguments needed)
 
-java -cp target/cyberattack-collector events.EventCollector
-
+java -cp target/cyberattack-collector.jar events.EventCollector
