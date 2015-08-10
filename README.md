@@ -1,10 +1,10 @@
 [![Build Status](https://travis-ci.org/cloudronin/cyberattack-collector.svg?branch=master)](https://travis-ci.org/cloudronin/cyberattack-collector/)
 
 
-# Cyber Attack Collector Tool
-Tool to collect cyber attacks that Norse tracks (http://map.norsecorp.com/) and persist into locally running MongoDB instance
+# Cyber Attack Event Collector 
+Tool to collect and persist cyber attack events that Norse tracks (http://map.norsecorp.com/) into a locally running MongoDB instance
 
-The Cyber-Attack-Collector Tool was built and tested on a Mac OSX 10.10.4 and requires the following dependencies to run:
+The Cyber Attack Event Collector Tool was built and tested on a Mac OSX 10.10.4 and requires the following dependencies to run:
 
 *	Java SE 7 (1.7.0_71) 
 *	Mongo DB version 3.0.5
