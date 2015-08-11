@@ -20,6 +20,18 @@ Once you have installed the above dependencies, you can build the tool by runnin
 This should build the shaded Jar (binary) needed to run the tool under the target/ folder.
 After which you can run the tool by issuing the following command in the command line:
 
-	java -cp target/cyberattack-collector.jar events.EventCollector
+	java -cp target/cyberattack-event-collector.jar events.EventCollector
+
+
+If you want the run the Docker container you can run the Following:
+
+	./build-docker.sh
+	./stop-docker.sh
+	./run-docker.sh
+
+Make sure that you have you have the following directory pre-created first on your host:
+
+	/opt/mongodb
+
 
 
