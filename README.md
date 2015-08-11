@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/cloudronin/cyberattack-collector.svg?branch=master)](https://travis-ci.org/cloudronin/cyberattack-collector/)
+[![Build Status](https://travis-ci.org/cloudronin/cyberattack-event-collector.svg?branch=master)](https://travis-ci.org/cloudronin/cyberattack-event-collector)
 
 
 # Cyber Attack Event Collector 
