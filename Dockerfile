@@ -28,5 +28,4 @@ EXPOSE 27017
 ADD server.sh /
 RUN chmod u+x /server.sh
 CMD ["/server.sh"]
-#CMD ["mongod"]
 
