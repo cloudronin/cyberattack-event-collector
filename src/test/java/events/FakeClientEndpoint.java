@@ -26,6 +26,8 @@ public class FakeClientEndpoint implements SocketClientEndpoint{
     private MessageHandler messageHandler;
     private Timer timer;
     
+	
+    
     public FakeClientEndpoint(URI endpointURI) {
         initialize();
     }
@@ -37,7 +39,7 @@ public class FakeClientEndpoint implements SocketClientEndpoint{
 			timer.schedule(new TimerTask(){
 				@Override
 				public void run() {
-					onMessage(EventCollectorTest.TEST_MESSAGE);
+					onMessage(TestData.TEST_MESSAGE);
 				}				
 			}, 1, 10);
         } catch (Exception e) {
