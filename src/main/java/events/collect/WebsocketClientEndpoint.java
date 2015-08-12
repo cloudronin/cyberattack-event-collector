@@ -60,7 +60,7 @@ public class WebsocketClientEndpoint implements SocketClientEndpoint {
 	 */
     @OnClose
     public void onClose(Session userSession, CloseReason reason) {
-        logger.log(Level.INFO, "closing websocket");
+        logger.log(Level.INFO, "closing websocket, reason:"+reason.getReasonPhrase());
         this.userSession = null;
     }
 
