@@ -5,6 +5,7 @@
 Tool to collect and persist cyber attack events that Norse tracks (http://map.norsecorp.com/) into a locally running MongoDB instance.
 The purpose of collecting these events is to use them for analysis by downstream tools like Spark and/or R/Python to train a model that classify IP traffic as malicious
 
+## Development Instructions
 The Cyber Attack Event Collector Tool was built and tested on a Mac OSX 10.10.4 and requires the following dependencies to run:
 
 *	Java SE 7 (1.7.0_71) 
@@ -22,7 +23,7 @@ After which you can run the tool by issuing the following command in the command
 
 	java -cp target/cyberattack-event-collector.jar events.EventCollector
 
-
+## Build Docker Container
 If you want the build and run the Docker container you can issue the following commands:
 
 	./build-docker.sh
@@ -33,7 +34,7 @@ Make sure that you have you have the following directory pre-created first on yo
 
 	/opt/mongodb
 
-
+# Run Docker container directly
 You can also directly pull and run the docker from the docker hub by issuing:
 	
 	sudo docker pull cloudronin/cyberattack-event-collector
