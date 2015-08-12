@@ -23,7 +23,7 @@ After which you can run the tool by issuing the following command in the command
 	java -cp target/cyberattack-event-collector.jar events.EventCollector
 
 
-If you want the run the Docker container you can run the Following:
+If you want the build and run the Docker container you can issue the following commands:
 
 	./build-docker.sh
 	./stop-docker.sh
@@ -32,6 +32,12 @@ If you want the run the Docker container you can run the Following:
 Make sure that you have you have the following directory pre-created first on your host:
 
 	/opt/mongodb
+
+
+You can also directly pull and run the docker from the docker hub by issuing:
+	
+	sudo docker pull cloudronin/cyberattack-event-collector
+	sudo docker run -d -v /opt/mongodb:/data/db -p 27017:27017 cloudronin/cyberattack-event-collector
 
 
 
