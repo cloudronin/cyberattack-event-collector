@@ -1,14 +1,18 @@
 package events;
 
 import java.net.URI;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.websocket.ClientEndpoint;
 import javax.websocket.CloseReason;
-import javax.websocket.ContainerProvider;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
-import javax.websocket.WebSocketContainer;
+
+import events.collect.MessageHandler;
+import events.collect.SocketClientEndpoint;
 
 /**
  * WebSocket Client
@@ -16,21 +20,30 @@ import javax.websocket.WebSocketContainer;
  * @author Vishnu Vettrivel
  */
 @ClientEndpoint
-public class WebsocketClientEndpoint {
+public class FakeClientEndpoint implements SocketClientEndpoint{
 
-
-
-	Session userSession = null;
+	private Session userSession = null;
     private MessageHandler messageHandler;
-
-    public WebsocketClientEndpoint(URI endpointURI) {
-        try {
-            WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-            container.connectToServer(this, endpointURI);
+    private Timer timer;
+    
+    public FakeClientEndpoint(URI endpointURI) {
+        initialize();
+    }
+    
+	public void initialize() {
+		try {	
+			onOpen(new FakeSession());
+			timer = new Timer("SocketTimer", true);
+			timer.schedule(new TimerTask(){
+				@Override
+				public void run() {
+					onMessage(EventCollectorTest.TEST_MESSAGE);
+				}				
+			}, 1, 10);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+	}
 
     /**
      * Callback hook for Connection open events.
@@ -90,12 +103,5 @@ public class WebsocketClientEndpoint {
 		return userSession;
 	}
     
-    /**
-     * Message handler.
-     *
-     */
-    public static interface MessageHandler {
 
-        public void handleMessage(String message);
-    }
 }

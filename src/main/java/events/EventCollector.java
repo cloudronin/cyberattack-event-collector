@@ -3,6 +3,15 @@ package events;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import events.collect.EventCollectorThread;
+import events.collect.MessageHandler;
+import events.collect.SocketClientEndpoint;
+import events.collect.WebsocketClientEndpoint;
+import events.persist.EventPersister;
+import events.util.Constants;
 
 /*
  * EventCollector Class that listens to websocket for attack events 
@@ -10,50 +19,29 @@ import java.net.UnknownHostException;
  */
 public class EventCollector {
 	
-	public static EventPersister persister;
-	
+	private static final Logger logger = Logger.getLogger( EventCollector.class.getName() );
+
     public static void main(String[] args) {
-        try {
-            // open websocket
-            WebsocketClientEndpoint clientEndPoint = initializeClientEndPoint(Constants.WEBSOCKET_URL);
-            try {
-				persister = EventPersister.getInstance();
-			} catch (UnknownHostException e) {
-                System.err.println("UnknownHostException: " + e.getMessage());
-			}
-
-         
-            // Ensure that the websocket is re-opened if needs to be             
-            while(true){
-            	try{
-            		Thread.sleep(Constants.SLEEP_TIME_MILLISECONDS);
-            	} catch (InterruptedException ex) {
-                    System.err.println("InterruptedException: " + ex.getMessage());
-            	} 
-            	if(clientEndPoint.getUserSession() == null)
-            		clientEndPoint = initializeClientEndPoint(Constants.WEBSOCKET_URL);
-            }
-            	
-        }    
-        catch (URISyntaxException ex) {
-            System.err.println("URISyntaxException exception: " + ex.getMessage());
-        }     
+        
+		try {
+			
+			final EventPersister persister = PersistenceUnit.getInstance();	
+			MessageHandler defaultHandler = new MessageHandler() {
+			    public void handleMessage(String message) {
+			        logger.log(Level.INFO, "Received:" + message);
+			        persister.persist(message, Constants.DB_NAME, Constants.NORSE_DB_COLLECTION_NAME);	        
+			    }
+			};
+	    	SocketClientEndpoint endpoint = new WebsocketClientEndpoint(
+	    			new URI(Constants.NORSE_WEBSOCKET_URL));
+	    	endpoint.addMessageHandler(defaultHandler);
+	    	EventCollectorThread norseCollector = new EventCollectorThread(endpoint);
+	    	norseCollector.run();
+    	
+		} catch (UnknownHostException ex) {
+			logger.log(Level.SEVERE, "EventCollector failed with UnknownHostException: ", ex);
+		} catch (URISyntaxException e) {
+			logger.log(Level.SEVERE, "EventCollector failed with URISyntaxException: ", e);
+		}
     }
-
-    /*
-     * Initialize Websocket and add Handler to Persist events recieved
-     */
-	private static WebsocketClientEndpoint initializeClientEndPoint(String webSocketURL)
-			throws URISyntaxException {
-		WebsocketClientEndpoint clientEndPoint = new WebsocketClientEndpoint(new URI(webSocketURL));
-
-		// add listener
-		clientEndPoint.addMessageHandler(new WebsocketClientEndpoint.MessageHandler() {
-		    public void handleMessage(String message) {
-		        System.out.println("Recieved:" + message);
-		        persister.persist(message);	        
-		    }
-		});
-		return clientEndPoint;
-	}
 }
