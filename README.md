@@ -34,7 +34,7 @@ Make sure that you have you have the following directory pre-created first on yo
 
 	/opt/mongodb
 
-# Run Docker container directly
+## Run Docker container directly
 You can also directly pull and run the docker from the docker hub by issuing:
 	
 	sudo docker pull cloudronin/cyberattack-event-collector
